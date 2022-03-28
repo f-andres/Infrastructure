@@ -55,91 +55,91 @@ resource "aws_iam_role_policy_attachment" "task_s3" {
 ###########################################
 
 
-data "aws_iam_policy_document" "assume_by_codebuild" {
-  statement {
-    sid     = "AllowAssumeByCodebuild"
-    effect  = "Allow"
-    actions = ["sts:AssumeRole"]
+# data "aws_iam_policy_document" "assume_by_codebuild" {
+#   statement {
+#     sid     = "AllowAssumeByCodebuild"
+#     effect  = "Allow"
+#     actions = ["sts:AssumeRole"]
 
-    principals {
-      type        = "Service"
-      identifiers = ["codebuild.amazonaws.com"]
-    }
-  }
-}
+#     principals {
+#       type        = "Service"
+#       identifiers = ["codebuild.amazonaws.com"]
+#     }
+#   }
+# }
 
-resource "aws_iam_role" "codebuild" {
-  name               = "test-codebuild"
-  assume_role_policy = data.aws_iam_policy_document.assume_by_codebuild.json
-}
+# resource "aws_iam_role" "codebuild" {
+#   name               = "test-codebuild"
+#   assume_role_policy = data.aws_iam_policy_document.assume_by_codebuild.json
+# }
 
-data "aws_iam_policy_document" "codebuild" {
-  statement {
-    sid    = "AllowS3"
-    effect = "Allow"
+# data "aws_iam_policy_document" "codebuild" {
+#   statement {
+#     sid    = "AllowS3"
+#     effect = "Allow"
 
-    actions = [
-      "s3:PutObject",
-      "s3:GetObject",
-      "s3:GetObjectVersion",
-      "s3:GetBucketAcl",
-      "s3:GetBucketLocation"
-    ]
+#     actions = [
+#       "s3:PutObject",
+#       "s3:GetObject",
+#       "s3:GetObjectVersion",
+#       "s3:GetBucketAcl",
+#       "s3:GetBucketLocation"
+#     ]
 
-    resources = ["*"]
-  }
+#     resources = ["*"]
+#   }
 
-  statement {
-    sid    = "AllowECR"
-    effect = "Allow"
+#   statement {
+#     sid    = "AllowECR"
+#     effect = "Allow"
 
-    actions = [
-      "ecr:*"
-    ]
+#     actions = [
+#       "ecr:*"
+#     ]
 
-    resources = ["*"]
-  }
+#     resources = ["*"]
+#   }
 
-  statement {
-    sid    = "AWSKMSUse"
-    effect = "Allow"
+#   statement {
+#     sid    = "AWSKMSUse"
+#     effect = "Allow"
 
-    actions = [
-      "kms:DescribeKey",
-      "kms:GenerateDataKey*",
-      "kms:Encrypt",
-      "kms:ReEncrypt*",
-      "kms:Decrypt"
-    ]
+#     actions = [
+#       "kms:DescribeKey",
+#       "kms:GenerateDataKey*",
+#       "kms:Encrypt",
+#       "kms:ReEncrypt*",
+#       "kms:Decrypt"
+#     ]
 
-    resources = ["*"]
-  }
+#     resources = ["*"]
+#   }
 
-  statement {
-    sid       = "AllowECSDescribeTaskDefinition"
-    effect    = "Allow"
-    actions   = ["ecs:DescribeTaskDefinition"]
-    resources = ["*"]
-  }
+#   statement {
+#     sid       = "AllowECSDescribeTaskDefinition"
+#     effect    = "Allow"
+#     actions   = ["ecs:DescribeTaskDefinition"]
+#     resources = ["*"]
+#   }
 
-  statement {
-    sid    = "AllowLogging"
-    effect = "Allow"
+#   statement {
+#     sid    = "AllowLogging"
+#     effect = "Allow"
 
-    actions = [
-      "logs:CreateLogGroup",
-      "logs:CreateLogStream",
-      "logs:PutLogEvents",
-    ]
+#     actions = [
+#       "logs:CreateLogGroup",
+#       "logs:CreateLogStream",
+#       "logs:PutLogEvents",
+#     ]
 
-    resources = ["*"]
-  }
-}
+#     resources = ["*"]
+#   }
+# }
 
-resource "aws_iam_role_policy" "codebuild" {
-  role   = aws_iam_role.codebuild.name
-  policy = data.aws_iam_policy_document.codebuild.json
-}
+# resource "aws_iam_role_policy" "codebuild" {
+#   role   = aws_iam_role.codebuild.name
+#   policy = data.aws_iam_policy_document.codebuild.json
+# }
 
 
 ##  Create Certificate for LB

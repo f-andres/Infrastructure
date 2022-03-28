@@ -13,13 +13,13 @@ output "test_cert" {
   value       = aws_iam_server_certificate.test_cert.arn
 }
 
-output "codebuild_role" {
-  description = "arn del rol"
-  value       = aws_iam_role.codebuild.arn
-}
+# output "codebuild_role" {
+#   description = "arn del rol"
+#   value       = aws_iam_role.codebuild.arn
+# }
 
-output "codepipeline_role" {
-  description = "arn del rol"
-  value       = aws_iam_role.pipeline_role.arn
-}
+# output "codepipeline_role" {
+#   description = "arn del rol"
+#   value       = aws_iam_role.pipeline_role.arn
+# }
 
