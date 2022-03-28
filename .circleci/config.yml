@@ -28,6 +28,7 @@ jobs:
       - run:
           name: terraform
           command: |
+            cd 01_iam
             terraform apply -auto-approve tfapply
       - persist_to_workspace:
           root: .
@@ -42,6 +43,7 @@ jobs:
       - run:
           name: terraform create destroy plan
           command: |
+            cd 01_iam
             terraform plan -destroy -out tfdestroy -var-file variables.tfvars
       - persist_to_workspace:
           root: .
@@ -57,6 +59,7 @@ jobs:
       - run:
           name: terraform destroy
           command: |
+            cd 01_iam
             terraform apply -auto-approve tfdestroy
 
 
