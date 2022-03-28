@@ -44,7 +44,7 @@ jobs:
           name: terraform create destroy plan
           command: |
             cd 01_iam
-            terraform plan -destroy -out tfdestroy -var-file variables.tfvars
+            terraform plan -destroy -out tfdestroy -var-file terraform.tfvars
       - persist_to_workspace:
           root: .
           paths:
