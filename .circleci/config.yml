@@ -12,9 +12,11 @@ jobs:
           command: |
             aws s3 ls
             cd 01_iam
-            ls -la 
+            ls -la
+            terraform workspace list 
             terraform init -reconfigure
             terraform plan -out tfapply -var-file terraform.tfvars
+            
       - persist_to_workspace:
           root: .
           paths:
