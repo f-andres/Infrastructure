@@ -10,7 +10,6 @@ jobs:
       - run:
           name: terraform init & plan 01 IAM
           command: |
-            aws s3 ls
             cd 01_iam
             ls -la
             terraform workspace list 
