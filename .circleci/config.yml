@@ -20,7 +20,7 @@ jobs:
             - .
 
   apply:
-   docker:
+    docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
     steps:
       - attach_workspace:
