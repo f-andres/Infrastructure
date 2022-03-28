@@ -10,8 +10,10 @@ jobs:
       - run:
           name: terraform init & plan 01 IAM
           command: |
+            aws s3 ls
             cd 01_iam
-            terraform init -input=false -reconfigure
+            ls -la 
+            terraform init -reconfigure
             terraform plan -out tfapply -var-file terraform.tfvars
       - persist_to_workspace:
           root: .
