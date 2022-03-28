@@ -11,7 +11,7 @@ jobs:
           name: terraform init & plan 01 IAM
           command: |
             cd 01_iam
-            terraform init -input=false
+            terraform init -input=false -reconfigure
             terraform plan -out tfapply -var-file terraform.tfvars
       - persist_to_workspace:
           root: .
